@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
+      <p @click="$router.push({name: 'home'})">Home</p>|
       <router-link to="/about">About</router-link>
     </div>
     <router-view />
