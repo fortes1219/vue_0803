@@ -8,18 +8,24 @@ export default new Router({
   routes: [
     {
       path: "/",
-      name: "home",
-      component: Home
-    },
-    {
-      path: "/about",
-      name: "about",
-      component: () => import("./views/About.vue")
-    },
-    {
-      path: "/api",
-      name: "apiTemp",
-      component: () => import("./views/ApiTemp.vue")
+      component: Home,
+      children: [
+        {
+          path: "/",
+          name: "Dashboard",
+          component: () => import("./components/home/dashboard.vue")
+        },
+        {
+          path: "/vuex",
+          name: "Vuex",
+          component: () => import("./views/VuexTemp.vue")
+        },
+        {
+          path: "/api",
+          name: "API",
+          component: () => import("./views/ApiTemp.vue")
+        }
+      ]
     }
   ]
 });

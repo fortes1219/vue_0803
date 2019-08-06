@@ -1,20 +1,22 @@
 <template>
-  <div class="api_temp">
-		<h1 data-inset="1rem">API Template</h1>
-    <div class="row column" data-inset="1rem">
+  <div class="page api_temp">
+    <div class="row column">
       <!-- <el-button @click="postTableData">POST</el-button> -->
-      <el-button @click="packagePostData">Package POST</el-button>
-      <el-table :data="tableData" height="50vh">
-        <el-table-column prop="id" label="ID" />
+      <div class="row" data-space="space-vertical">
+        <el-button @click="packagePostData">Package POST</el-button>
+      </div>
+
+    </div>
+    <el-table :data="tableData" style="width: 100%; overflow: hidden;" height="80vh">
+        <el-table-column prop="id" label="ID" align="center" width="100" />
         <el-table-column prop="name" label="Name" />
         <el-table-column prop="date" label="Date" />
-        <el-table-column label="Action">
+        <el-table-column label="Action" align="center" width="120">
           <template slot-scope="scope">
             <el-button @click="delData(scope.row.id)">DELETE</el-button>
           </template>
         </el-table-column>
       </el-table>
-    </div>
   </div>
 </template>
 

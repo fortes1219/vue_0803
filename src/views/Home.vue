@@ -1,27 +1,57 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <div class="row column" data-inset="1rem">
-      <div class="row" data-space="space-vertical">
-        <temp-counter :color.sync="counterColor" :text.sync="counterText" :counter.sync="counter" />
+  <div class="main home">
+    <div class="side">
+      <div class="logo">Fate/Admin Order</div>
+      <nav>
+        <label>Home</label>
+        <ul>
+          <li @click="$router.push({name: 'Dashboard'})">Dashboard</li>
+          <li @click="$router.push({name: 'Dashboard'})">Component</li>
+          <li @click="$router.push({name: 'Dashboard'})">圖表</li>
+          <li @click="$router.push({name: 'API'})">API</li>
+        </ul>
+        <label>狀態管理</label>
+        <ul>
+          <li @click="$router.push({name: 'Vuex'})">Vuex</li>
+        </ul>
+        <label>多語系處理</label>
+        <ul>
+          <li @click="$router.push({name: 'Dashboard'})">i18n</li>
+        </ul>
+        <label>圖表</label>
+        <ul>
+          <li @click="$router.push({name: 'Dashboard'})">v-charts</li>
+        </ul>
+      </nav>
+      <div class="footer"></div>
+    </div>
+    <div class="primary">
+      <div class="header">
+        <p>{{ getRouterName }}</p>
       </div>
+      <router-view />
     </div>
   </div>
 </template>
 
 <script>
-import tempCounter from '@/components/counter.vue'
-
+import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
 export default {
   name: "home",
-  components: {
-    tempCounter
-  },
+
   data() {
     return {
-      counterColor: 'blue',
-      counter: 0,
-      counterText: 'temp counter',
+      pathName: ''
+    }
+  },
+
+  mounted() {
+    console.log(this.$route.name)
+  },
+
+  computed: {
+    getRouterName(){
+      return this.$route.name
     }
   },
 

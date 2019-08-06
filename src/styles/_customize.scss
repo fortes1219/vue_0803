@@ -1,0 +1,124 @@
+.main {
+    @include flexBox(row);
+
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    .side {
+        @include flexBox(column);
+		position: relative;
+		width: 260px;
+		min-width: 260px;
+        height: 100%;
+        background: rgba(0, 22, 32, 0.8);
+
+        &:after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+            background: url("/img/fgo.jpg") no-repeat center center;
+            background-size: cover;
+        }
+
+        .logo {
+            @include flexBox(row);
+            @include flexAlign(center, center);
+
+            height: 50px;
+            font-size: 1.3rem;
+            color: #fff;
+            text-align: center;
+            text-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .footer {
+            @extend .logo;
+        }
+
+        nav {
+            @include flexBox(column);
+
+            flex: 1;
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+
+            label {
+                @include flexBox(row);
+                @include flexAlign(center, flex-start);
+
+                width: 100%;
+                padding: 0.5rem 1rem;
+                color: rgb(4, 183, 214);
+                font-size: 0.8rem;
+                background-color: rgba(22, 94, 153, 0.6);
+            }
+
+            ul {
+                @include flexBox(column);
+
+                li {
+                    @include flexBox(row);
+                    @include flexAlign(center, flex-start);
+
+                    width: 100%;
+                    padding: 1rem;
+                    font-size: 0.8rem;
+                    color: #fff;
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+                    cursor: pointer;
+
+                    @include easeOutBack(0.3s);
+
+                    &:hover {
+                        background: rgba(0, 0, 0, 0.3);
+                        padding: 1.1rem;
+                        font-size: 0.85rem;
+                        text-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+                    }
+                }
+            }
+        }
+    }
+
+    .primary {
+        @include flexBox(column);
+		width: 100%;
+        height: 100%;
+		background: #efefef;
+		overflow: hidden;
+
+        .header {
+            @include flexBox(row);
+            @include flexAlign(center, flex-start);
+            @include boxSizing;
+
+            height: 50px;
+            padding: 0 1rem;
+            background: linear-gradient(to right, #191b25, #1d3446 50%);
+
+            p {
+                font-size: 1rem;
+                color: #fff;
+                text-align: center;
+                text-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+            }
+        }
+
+        .page {
+
+			@include boxSizing;
+			width: 100%;
+			flex: 1;
+			overflow-y: auto;
+			padding: 1rem;
+        }
+    }
+}
