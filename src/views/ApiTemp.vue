@@ -31,18 +31,10 @@ export default {
   },
 
   created() {
-    // this.getTableData()
     this.packageGetData()
   },
 
   methods: {
-    // getTableData() {
-    //   const source = 'http://localhost:3000/tableData'
-    //   this.axios.get(source).then(res => {
-    //     this.tableData = res.data
-    //     console.log(this.tableData)
-    //   })
-    // },
 
     async packageGetData() {
       const source = 'http://localhost:3000/tableData'
@@ -63,32 +55,6 @@ export default {
       this.packageGetData()
       console.log(this.tableData)
     },
-
-    // postTableData() {
-    //   const source = 'http://localhost:3000/tableData'
-    //   const currentDate = new Date().toJSON().slice(0, 10)
-    //   const postData = {
-    //     id: `${this.tableData.length}`,
-    //     name: 'data ' + `${this.tableData.length + 1}`,
-    //     date: currentDate
-    //   }
-    //   this.axios.post(source, postData).then(res => {
-    //     this.getTableData()
-    //     console.log(this.tableData)
-    //   }, err => {
-    //     console.log(err + ' post failed.')
-    //   })
-    // },
-
-    // delThis(id) {
-    //   const source = 'http://localhost:3000/tableData/' + `${id}`
-    //   this.axios.delete(source).then(res => {
-    //     this.getTableData()
-    //     console.log(this.tableData)
-    //   }, err => {
-    //     console.log(err + ' delete failed.')
-    //   })
-    // },
 
     async delData(id) {
       const source = 'http://localhost:3000/tableData/' + `${id}`
