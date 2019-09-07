@@ -7,6 +7,7 @@
         <ul>
           <li @click="$router.push({name: 'Dashboard'})">Dashboard</li>
           <li @click="$router.push({name: 'Dashboard'})">Component</li>
+          <li @click="$router.push({name: 'DataEvent'})">Data Event</li>
           <li @click="$router.push({name: 'Dashboard'})">圖表</li>
           <li @click="$router.push({name: 'API'})">API</li>
         </ul>

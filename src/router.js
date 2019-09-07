@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 
-Vue.use(Router);
+Vue.use(Router)
 
 export default new Router({
   routes: [
@@ -16,14 +16,19 @@ export default new Router({
           component: () => import('./components/home/dashboard.vue')
         },
         {
-          path: '/vuex',
+          path: 'vuex',
           name: 'Vuex',
           component: () => import('./views/VuexTemp.vue')
         },
         {
-          path: '/api',
+          path: 'api',
           name: 'API',
           component: () => import('./views/ApiTemp.vue')
+        },
+        {
+          path: 'data-event',
+          name: 'DataEvent',
+          component: () => import('./components/home/DataEvent.vue')
         }
       ]
     }
