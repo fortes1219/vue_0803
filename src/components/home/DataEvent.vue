@@ -9,7 +9,7 @@
           :label="item.label"
         />
       </el-select>
-      <div v-if="tempSelect.selected === '3'" class="input_inner" data-width="20rem">
+      <div v-if="tempSelect.selected === '1'" class="input_inner" data-width="20rem">
         <el-input
           v-model="tempInput"
           type="text"
@@ -17,17 +17,20 @@
           @change="handleInputChange"
         />
       </div>
-      <div v-if="tempSelect.selected === '3'" class="input_inner">
+      <div v-if="tempSelect.selected === '1'" class="row vertical">
         <el-checkbox :indeterminate="isInd" v-model="checkAll" @change="handleCheckAll">Select All</el-checkbox>
-        <el-checkbox-group v-model="checked" @change="handleChecked">
-          <el-checkbox 
-            v-for="(item, index) in checkItems" 
-            :label="item" 
-            :key="index"
-          >
-            {{item}}
-          </el-checkbox>
-        </el-checkbox-group>
+        <div class="input _inner">
+          <el-checkbox-group v-model="checked" @change="handleChecked">
+            <el-checkbox 
+              v-for="(item, index) in checkItems" 
+              :label="item.value"
+              :name="item.label"
+              :key="index"
+            >
+              {{item.label}}
+            </el-checkbox>
+          </el-checkbox-group>
+        </div>
       </div>
     </div>
   </div>
@@ -40,7 +43,7 @@ export default {
     return {
       tempInput: "",
       tempSelect: {
-        selected: "",
+        selected: "1",
         items: [
           { id: 0, value: "1", label: "option 1" },
           { id: 1, value: "2", label: "option 2" },
@@ -48,15 +51,15 @@ export default {
         ]
       },
       checkAll: false,
-      isInd: false,
+      isInd: false, //isInd = isIndeterminate，是否為「不定數」的意思，沒有全部選擇僅有部分選擇時調用
       checked: [],
       checkItems: [
-        // {label: "check 1", value: "1"},
-        // {label: "check 2", value: "2"},
-        // {label: "check 3", value: "3"}
-        "check 1",
-        "check 2",
-        "check 3"
+        {label: "check 1", value: "1"},
+        {label: "check 2", value: "2"},
+        {label: "check 3", value: "3"}
+        // "check 1",
+        // "check 2",
+        // "check 3"
       ]
     };
   },
@@ -71,17 +74,17 @@ export default {
       console.log(this.tempSelect.selected);
     },
 
-    handleCheckAll(val) {
-      this.checked = val ? this.checkItems : [];
-      this.isInd = false;
-      console.log(this.checked);
+    handleCheckAll() {
+      this.checkAll ? this.checkItems.forEach(arr => { this.checked.push(arr.value) }) : this.checked = []
+      this.isInd = false
+      console.log(this.checked)
     },
 
     handleChecked(val) {
-      let checkedCount = val.length;
-      this.checkAll = checkedCount === this.checkItems.length;
-      this.isInd = checkedCount > 0 && checkedCount < this.checkItems.length;
-      console.log(this.checked);
+      this.checkAll = val.length === this.checkItems.length
+      // 已被選取的length必須大於0、且checked length 小於原本資料來源的length才會判斷是不定數，等號後面會依據這個比較結果回傳布林
+      this.isInd = val.length > 0 && val.length < this.checkItems.length
+      console.log(this.checked)
     }
   }
 };
