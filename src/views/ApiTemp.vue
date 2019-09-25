@@ -60,15 +60,29 @@ export default {
   },
 
   methods: {
+    // async packageGetData() {
+    //   const source = 'http://localhost:3000/tableData'
+    //   let res = await this.$api.get(source)
+    //   this.tableData = [...res]
+    //   console.log(res)
+    // },
+
     async packageGetData() {
-      const source = 'http://localhost:3000/tableData'
-      let res = await this.$api.get(source)
-      this.tableData = [...res]
-      console.log(res)
+      const url = 'tableData'
+      let jwt = {
+        "lang": ''
+      }
+      let res = await this.$api.get(url, jwt)
+      if (res.result == 1)  {
+        console.log(res)
+        this.tableData = [...res.data]
+      } else {
+        console.log('API error')
+      }
     },
 
     async packagePostData() {
-      const source = 'http://localhost:3000/tableData'
+      const source = 'tableData'
       const currentDate = new Date().toJSON().slice(0, 10)
       const postData = {
         id: `${this.tableData.length}`,
@@ -81,7 +95,7 @@ export default {
     },
 
     async delData(id) {
-      const source = 'http://localhost:3000/tableData/' + `${id}`
+      const source = 'tableData/' + `${id}`
       await this.$api.delete(source)
       this.packageGetData()
       console.log(this.tableData)
@@ -110,7 +124,7 @@ export default {
       }
 
       console.log(queryConditions)
-      let source = 'http://localhost:3000/tableData' + queryConditions
+      let source = 'tableData' + queryConditions
 
       let res = await this.$api.get(source)
       this.tableData = [...res]
