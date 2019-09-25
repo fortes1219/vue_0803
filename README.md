@@ -121,55 +121,50 @@ Vue.prototype.$api = api // 定義api這個常數給AXIOS存取json-server或實
 
 ```javascript=
 /* api.js */
-
 import axios from 'axios'
-axios.defaults.baseURL = ''
-
-
-// GET
+axios.defaults.baseURL = 'http://localhost:3000/'
 const api = {
-  async get (url, data) {
-    try{
-    let res = await axios.get(url, { params: data })
-    res = res.data
-    return new Promise((resolve) => {
-      resolve(res)
-    })
-    } catch(err) {
-      console.log(err)
-    }
-  }
-},
+	headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 
-// POST
-const api = {
-  async get (url, data) {
-    try{
-    let res = await axios.post(url, data)
-    res = res.data
-    return new Promise((resolve, reject) => {
-      resolve(res)
-    })
-    } catch(err) {
-      console.log(err)
-    }
-  },
+	get: function (url, params) {
+		return new Promise((resolve, reject) => {
+			axios.get(url, {
+				params: params
+			})
+				.then((response) => {
+					resolve(response.data);
+				})
+				.catch((error) => {
+					reject(error);
+				});
+		})
+	},
 
-// DELETE
-const api = {
-  async get (url, data) {
-    try{
-    let res = await axios.delete(url, {params: data})
-    res = res.data
-    return new Promise((resolve, reject) => {
-      resolve(res)
-    })
-    } catch(err) {
-      console.log(err)
-    }
-  }
+	post: function (url, params) {
+		return new Promise((resolve, reject) => {
+			axios.post(url, params)
+				.then((response) => {
+					resolve(response.data);
+				})
+				.catch((error) => {
+					reject(error);
+				});
+		})
+	},
+
+	delete: function (url, params) {
+		return new Promise((resolve, reject) => {
+			axios.delete(url)
+				.then((response) => {
+					resolve(response.data);
+				})
+				.catch((error) => {
+					reject(error);
+				});
+		})
+	}
+
 }
-
 export default api
 ```
 
@@ -197,8 +192,8 @@ data() {
  },
  methods: {
       async packageGetData() {
-      const source = 'http://localhost:3000/tableData'  // json-server  API 位置
-      let res = await this.$api.get(source)
+      const url = 'tableData'  // json-server  API 位置
+      let res = await this.$api.get(url)
       this.tableData = [...res]  // 透過ES6語法將res的內容直接繼承到tableData
       console.log(res)
     },
