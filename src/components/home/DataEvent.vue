@@ -40,7 +40,7 @@
       <li>羈絆4，點數達5萬的從者，印出新的絆等級且格式是"從者名+絆等級+(羈絆等級提升)+絆點數" (下示</li>
     </ul>
     <br>
-    <div v-for="(item, index) in battleData">
+    <div v-for="(item, index) in battleData" :key="index">
       {{ item.name + ' '}}
       {{ '絆LV' + item.bound.level + ' ' }}{{ handleLevelUpMsg[index] }}
       {{'點數' + item.bound.point }}
