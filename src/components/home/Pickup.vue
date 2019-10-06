@@ -39,6 +39,14 @@
         </div>
       </div>
     </div>
+    <div v-if="buttonDisable" class="row horizontal v_center" data-space="space-vertical">
+      <p>突然有</p>
+      <div class="input_inner" data-width="5rem" data-space="space-horizontal">
+        <el-input v-model="rentCount" type="text" placeholder="人數" />
+      </div>
+      <p>個人借用你的寶五滿破寶石翁賴光</p>
+      <el-button type="primary" @click="chargePoint">確認</el-button>
+    </div>
   </div>
 </template>
 
@@ -53,6 +61,7 @@ export default {
         friendShip: 2100,
         playableCount: 0, // 初始值 0
       },
+      rentCount: 1,
       cost: 200,
       buttonDisable: false,
       multiPickButton: true,
@@ -96,6 +105,14 @@ export default {
       this.pickStart = !this.pickStart
       this.account.friendShip = this.account.friendShip - (this.cost * val)
       this.buttonMsg
+    },
+
+    chargePoint() {
+      // 出借從者一次+25
+      let increase = this.rentCount * 25
+      this.account.friendShip += increase
+      console.log('出借從者得到: ' + increase + ' 友情點數' )
+      this.buttonMsg
     }
   },
 
@@ -105,6 +122,10 @@ export default {
       let totalPoint = this.account.friendShip
       let multCount = Math.floor((totalPoint / this.cost))
       let oneCount = 0
+
+      // 別忘了預設值重置
+      this.buttonDisable = false
+      this.multiPickButton = true
       this.account.playableCount = multCount
       
       // 判斷點數是否足夠抽一次 (用三元式)
@@ -134,19 +155,6 @@ export default {
       if (multCount < 2) {
         this.multiPickButton = false
       }
-    },
-
-    pointListener() {
-      let totalPoint = this.account.friendShip
-      let pickCount = totalPoint / this.cost
-      let setButtonDisabled = false
-      // if (this.account.friendShip < 200) {
-      //   this.msg.oneTime = '點數不足'
-      //   setButtonDisabled = true
-      //   console.log(setButtonDisabled, this.msg)
-      // }
-      
-      return
     }
   },
 
