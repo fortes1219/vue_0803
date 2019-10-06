@@ -1,0 +1,13 @@
+.el-customize {
+	.el-button {
+		&.is-disabled {
+			background-color: #999;
+			color: #fff;
+			opacity: 0.6;
+			&:hover {
+				background-color: #999;
+				cursor: not-allowed;
+			}
+		}
+	}	
+}
