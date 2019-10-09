@@ -16,7 +16,10 @@
   "profile": {
     "name": "typicode"
   },
-  "login": {},
+  "login": {
+    "token": "sj387kdYXsl229Sk",
+    "mag": "登入成功"
+  },
   "tableData": [
     {
       "id": "0",

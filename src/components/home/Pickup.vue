@@ -28,9 +28,9 @@
       </div>
       <div v-if="pickStart" class="pickupBlock">
         <div class="display" data-row-count="5">
-          <div class="data_row card_obj">
+          <div v-for="(item, index) in pickPool " class="data_row card_obj">
             <span class="card">
-              <p>cards</p>
+              <p>{{ item.name }}</p>
             </span>
           </div>
         </div>
@@ -41,8 +41,8 @@
     </div>
     <div v-if="buttonDisable" class="row horizontal v_center" data-space="space-vertical">
       <p>突然有</p>
-      <div class="input_inner" data-width="5rem" data-space="space-horizontal">
-        <el-input v-model="rentCount" type="text" placeholder="人數" />
+      <div class="input_inner" data-width="10rem" data-space="space-horizontal">
+        <el-input-number v-model="rentCount" type="text" :min="1" placeholder="人數" />
       </div>
       <p>個人借用你的寶五滿破寶石翁賴光</p>
       <el-button type="primary" @click="chargePoint">確認</el-button>
@@ -68,7 +68,7 @@ export default {
       button: {
         one: {
           msg: '',
-          count: 0  
+          count: 0
         },
         mult: {
           msg: '',
@@ -103,8 +103,12 @@ export default {
     handlePickupDisplay(val) {
       this.beforePick = !this.beforePick
       this.pickStart = !this.pickStart
-      this.account.friendShip = this.account.friendShip - (this.cost * val)
       this.buttonMsg
+      this.pickCard(val)
+      // this.account.friendShip = this.account.friendShip - (this.cost * val)
+      if (val == 0) {
+        this.pickPool = []
+      }
     },
 
     chargePoint() {
@@ -113,6 +117,21 @@ export default {
       this.account.friendShip += increase
       console.log('出借從者得到: ' + increase + ' 友情點數' )
       this.buttonMsg
+    },
+
+    pickCard(val) {
+      let max = val
+      let arrIndex = 0
+
+      for (let i = 0; i < val; i++) {
+        if (val < this.cardPool.length) {
+          max = this.cardPool.length
+        }
+        arrIndex = Math.floor(Math.random() * max)
+        this.pickPool.push(this.cardPool[arrIndex])
+        console.log(arrIndex)
+      }
+
     }
   },
 
@@ -127,7 +146,7 @@ export default {
       this.buttonDisable = false
       this.multiPickButton = true
       this.account.playableCount = multCount
-      
+
       // 判斷點數是否足夠抽一次 (用三元式)
       totalPoint >= cost ? oneCount = 1 : oneCount = 0
       this.button.one.count = oneCount
@@ -139,8 +158,8 @@ export default {
         this.buttonDisable = true
       }
 
-      // 判斷點數是否足夠抽十次，如果不夠十次，剩餘次數是否大於兩次? 
-      
+      // 判斷點數是否足夠抽十次，如果不夠十次，剩餘次數是否大於兩次?
+
       if (multCount >= 10) {
         this.button.mult.msg = `${'10 回召喚'}`
         this.button.mult.count = 10
@@ -159,7 +178,7 @@ export default {
   },
 
   mounted() {
-    
+
   }
 };
 </script>
