@@ -69,16 +69,15 @@ export default {
 
     async packageGetData() {
       const url = 'tableData'
-      let jwt = {
-        "lang": ''
-      }
-      let res = await this.$api.get(url, jwt)
-      if (res.result == 1)  {
-        console.log(res)
-        this.tableData = [...res.data]
-      } else {
-        console.log('API error')
-      }
+      let res = await this.$api.get(url)
+      console.log(res)
+      this.tableData = [...res]
+      // if (res.result == 1)  {
+      //   console.log(res)
+      //   this.tableData = [...res.data]
+      // } else {
+      //   console.log('API error')
+      // }
     },
 
     async packagePostData() {
