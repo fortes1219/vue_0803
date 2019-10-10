@@ -105,7 +105,7 @@ export default {
       this.pickStart = !this.pickStart
       this.buttonMsg
       this.pickCard(val)
-      // this.account.friendShip = this.account.friendShip - (this.cost * val)
+      this.account.friendShip = this.account.friendShip - (this.cost * val)
       if (val == 0) {
         this.pickPool = []
       }
