@@ -28,7 +28,7 @@
       </div>
       <div v-if="pickStart" class="pickupBlock">
         <div class="display" data-row-count="5">
-          <div v-for="(item, index) in pickPool " class="data_row card_obj">
+          <div v-for="(item, index) in pickPool" :key="index" class="data_row card_obj">
             <span class="card">
               <p>{{ item.name }}</p>
             </span>
