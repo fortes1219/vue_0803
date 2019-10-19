@@ -34,6 +34,16 @@ export default new Router({
           path: 'pickup',
           name: 'Pickup',
           component: () => import('./components/home/Pickup.vue')
+        },
+        {
+          path: 'localstorange',
+          name: 'LocalStorange',
+          component: () => import('./components/home/LocalStorange.vue'),
+        },
+        {
+          path: 'localstorange_card_result',
+          name: 'LocalStorangeCardResult',
+          component: () => import('./components/home/LocalStorangeCardResult.vue')
         }
       ]
     }
