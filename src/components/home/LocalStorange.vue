@@ -59,12 +59,6 @@ import { resetForm } from 'utils/resetForm'
 export default {
   data() {
     return {
-      // card: {
-      //   class: 'saber',
-      //   name: 'アルトリア(リリィ)',
-      //   rare: '4'
-      // }
-      name: '',
       form: {
         name: '',
         prefer: '',
@@ -86,7 +80,12 @@ export default {
         { id: 9, name: 'Alterego' },
         { id: 10, name: 'Foreigner' },
         { id: 11, name: 'Shielder' }
-      ]
+      ],
+      // card: {
+      //   class: 'saber',
+      //   name: 'アルトリア(リリィ)',
+      //   rare: '4'
+      // }
     }
   },
 
@@ -113,6 +112,13 @@ export default {
       obj.date = ''
       obj.time = ''
     },
+
+    reloadSavedForm() {
+      const stored = JSON.parse(localStorage.getItem('form'))
+      if (stored !== null) {
+        this.form = stored
+      }
+    },
     // setLocalStorange() {
     //   const targetCard = this.card
     //   localStorage.setItem('card', JSON.stringify(targetCard))
@@ -123,10 +129,8 @@ export default {
     // }
   },
 
-
-
   created() {
-    this.form = JSON.parse(localStorage.getItem('form'))
+    this.reloadSavedForm()
     // this.setLocalStorange()
   }
 }
