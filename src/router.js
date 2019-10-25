@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
+import Cookies from 'js-cookie'
 
 Vue.use(Router)
 
-export default new Router({
+ const router = new Router({
   routes: [
     {
       path: '/',
@@ -13,7 +14,7 @@ export default new Router({
         {
           path: '/',
           name: 'Dashboard',
-          component: () => import('./components/home/dashboard.vue')
+          component: () => import('./components/home/dashboard.vue'),
         },
         {
           path: 'vuex',
@@ -44,8 +45,38 @@ export default new Router({
           path: 'localstorange_card_result',
           name: 'LocalStorangeCardResult',
           component: () => import('./components/home/LocalStorangeCardResult.vue')
+        },
+        {
+          path: 'cookies',
+          name: 'Cookies',
+          component: () => import('./components/home/Cookies.vue'),
+          meta: { requireAuth: true }
         }
       ]
     }
   ]
-});
+})
+
+router.beforeEach(async (to, from, next) => {
+  console.log(to, from)
+  if (to.meta.requireAuth) {
+    // const info = Cookies.get('cookie')
+    const info = true
+    // const token = JSON.parse(Cookies.get('cookie')).token
+    // if (info && JSON.parse(info).token.length > 0) {
+    if (info) {
+      next();
+    } else {
+      next({ path: '/' });
+    }
+  } else {
+    next();
+  }
+})
+
+// router.afterEach((to) => {
+//   console.log(to)
+//   document.title = to.meta.title
+// })
+
+export default router

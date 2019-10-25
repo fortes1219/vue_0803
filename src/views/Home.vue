@@ -12,6 +12,7 @@
           <li @click="$router.push({name: 'Dashboard'})">圖表</li>
           <li @click="$router.push({name: 'API'})">API</li>
           <li @click="$router.push({name: 'LocalStorange'})">Local Storange</li>
+          <li @click="$router.push({name: 'Cookies'})">Cookies</li>
         </ul>
         <label>狀態管理</label>
         <ul>
