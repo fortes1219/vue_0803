@@ -5,16 +5,24 @@ import Cookies from 'js-cookie'
 
 Vue.use(Router)
 
- const router = new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
+      name: 'Login',
+      component: () => import('./views/Login.vue')
+    },
+    {
+      path: '/home',
+      name: 'home',
       component: Home,
+      meta: { requireAuth: true },
       children: [
         {
-          path: '/',
+          path: 'dashboard',
           name: 'Dashboard',
           component: () => import('./components/home/dashboard.vue'),
+          meta: { requireAuth: true }
         },
         {
           path: 'vuex',
@@ -57,20 +65,23 @@ Vue.use(Router)
   ]
 })
 
-router.beforeEach(async (to, from, next) => {
-  console.log(to, from)
+router.beforeEach(async(to, from, next) => {
+  // console.log(to, from)
   if (to.meta.requireAuth) {
-    // const info = Cookies.get('cookie')
-    const info = true
-    // const token = JSON.parse(Cookies.get('cookie')).token
-    // if (info && JSON.parse(info).token.length > 0) {
+    const info = Cookies.get('login')
+    const token = JSON.parse(info).token
+    console.log(token)
     if (info) {
-      next();
+      if (token.length > 0 || token === undefined) {
+        next()
+      } else {
+        next({ name: 'Login' })
+      }
     } else {
-      next({ path: '/' });
+      next({ name: 'Login' })
     }
   } else {
-    next();
+    next()
   }
 })
 

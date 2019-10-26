@@ -28,7 +28,7 @@ export default {
       loginForm: {
         name: 'Master',
         pwd: '123456',
-        token: 'jksfhlsdafigsdfkgsfwefq'
+        token: 'jksfhlsdafigsd1432fkgsfsdwef2q'
       },
       stored: {
 
