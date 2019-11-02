@@ -59,6 +59,12 @@ const router = new Router({
           name: 'Cookies',
           component: () => import('./components/home/Cookies.vue'),
           meta: { requireAuth: true }
+        },
+        {
+          path: 'regexp',
+          name: 'Regexp',
+          component: () => import('./components/home/Regexp.vue'),
+          meta: { requireAuth: true }
         }
       ]
     }

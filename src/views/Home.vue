@@ -13,6 +13,7 @@
           <li @click="$router.push({name: 'API'})">API</li>
           <li @click="$router.push({name: 'LocalStorange'})">Local Storange</li>
           <li @click="$router.push({name: 'Cookies'})">Cookies</li>
+          <li @click="$router.push({name: 'Regexp'})">RegExp 正則表達式</li>
         </ul>
         <label>狀態管理</label>
         <ul>
