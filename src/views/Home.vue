@@ -21,7 +21,7 @@
         </ul>
         <label>多語系處理</label>
         <ul>
-          <li @click="$router.push({name: 'Dashboard'})">i18n</li>
+          <li @click="$router.push({name: 'VueI18n'})">i18n</li>
         </ul>
         <label>圖表</label>
         <ul>

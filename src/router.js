@@ -65,6 +65,12 @@ const router = new Router({
           name: 'Regexp',
           component: () => import('./components/home/Regexp.vue'),
           meta: { requireAuth: true }
+        },
+        {
+          path: 'vuei18n',
+          name: 'VueI18n',
+          component: () => import('./components/home/VueI18n.vue'),
+          meta: { requireAuth: true }
         }
       ]
     }

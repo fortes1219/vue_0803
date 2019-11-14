@@ -4,6 +4,7 @@ import router from './router'
 import store from '@/store'
 import '@/styles/style.scss'
 import axios from 'axios'
+import i18n from './lang'
 import api from '@/service/api'
 import VueAxios from 'vue-axios'
 import ElementUI from 'element-ui'
@@ -18,5 +19,6 @@ new Vue({
   el: '#app',
   router,
   store,
+  i18n,
   render: h => h(App)
 })
