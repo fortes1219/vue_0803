@@ -47,7 +47,7 @@ const router = new Router({
         {
           path: 'localstorange',
           name: 'LocalStorange',
-          component: () => import('./components/home/LocalStorange.vue'),
+          component: () => import('./components/home/LocalStorange.vue')
         },
         {
           path: 'localstorange_card_result',
