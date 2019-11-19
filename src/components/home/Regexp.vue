@@ -9,11 +9,11 @@
         <div class="el-form-item__error">{{ form.name.msg }}</div>
       </el-form-item>
       <el-form-item label="電話號碼">
-        <el-input v-model="form.tel.value" type="text" placeholder="請輸入電話號碼: 02-20000000" @change="nativeValidate(form, 'tel')" />
+        <el-input v-model="form.tel.value" type="text" placeholder="請輸入電話號碼: 02-23033824" @change="nativeValidate(form, 'tel')" />
         <div class="el-form-item__error">{{ form.tel.msg }}</div>
       </el-form-item>
       <el-form-item label="手機號碼">
-        <el-input v-model="form.phone.value" type="text" placeholder="請輸入手機號碼: 0000-000-000" @change="nativeValidate(form, 'phone')" />
+        <el-input v-model="form.phone.value" type="text" placeholder="請輸入手機號碼: 0987-987-987" @change="nativeValidate(form, 'phone')" />
         <div class="el-form-item__error">{{ form.phone.msg }}</div>
       </el-form-item>
       <el-form-item label="Email">
@@ -25,7 +25,7 @@
         <div class="el-form-item__error">{{ form.url.msg }}</div>
       </el-form-item>
       <div class="row horizontal end">
-        <el-button @click="$message({ message: '登入成功', type: 'success' })" :disabled="status">SUBMIT</el-button>
+        <el-button @click="nativeSubmit" :disabled="submitDisabled">SUBMIT</el-button>
       </div>
     </el-form>
     <br>
@@ -48,7 +48,6 @@
       </el-form-item>
       <div class="row horizontal end">
         <el-button type="primary" @click="submit('loginForm')">SUBMIT</el-button>
-        <el-button @click="handleFormVali">test</el-button>
       </div>
     </el-form>
   </div>
@@ -60,31 +59,11 @@ export default {
   data() {
     return {
       form: {
-        name: {
-          value: '',
-          msg: '',
-          check: false
-        },
-        tel: {
-          value: '',
-          msg: '',
-          check: false
-        },
-        phone: {
-          value: '',
-          msg: '',
-          check: false
-        },
-        email: {
-          value: '',
-          msg: '',
-          check: false
-        },
-        url: {
-          value: '',
-          msg: '',
-          check: false
-        },
+        name: { value: '', msg: '' },
+        tel: { value: '', msg: '' },
+        phone: { value: '', msg: '' },
+        email: { value: '', msg: '' },
+        url: { value: '', msg: '' },
       },
       form2: {
         name: '',
@@ -100,7 +79,7 @@ export default {
         email: [{ required: true, pattern: /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/ ,message: "Email格式錯誤", trigger: "blur" }],
         url: [{ required: true, pattern: /^((ht|f)tps?):\/\/[\w\-]+(\.[\w\-]+)+([\w\-.,@?^=%&:\/~+#]*[\w\-@?^=%&\/~+#])?$/ ,message: "網址格式錯誤", trigger: "blur" }]
       },
-      status: true
+      submitDisabled: true
     };
   },
 
@@ -109,29 +88,8 @@ export default {
   },
 
   methods: {
-    handleFormVali() {
-      console.log(this.$refs.loginForm)
-    },
-    submit(formName) {
-      this.$refs[formName].validate(valid => {
-        console.log("valid: ", valid)
-        if (valid) {
-          this.$message({
-            message: "登入成功",
-            type: "success"
-          })
-        } else {
-          this.$message({
-            message: "登入失敗",
-            type: "warning"
-          })
-          return false
-        }
-      })
-    },
-
+    // native validate
     nativeValidate(target, key) {
-      let validateParam = {...target}
       let checkTel = reg_telTaipei(target.tel.value)
       let checkPhone = reg_phoneType1(target.phone.value)
       let checkEmail = reg_email(target.email.value)
@@ -155,13 +113,13 @@ export default {
         return item == false
       })
 
-      this.form.status = !result
-      if (result == undefined) this.form.status = false
+      // this.form.status = !result
+      result == undefined ? this.submitDisabled = false : this.submitDisabled = true
 
-      console.log('form1: ', arr, result)
+      console.log('form: ', arr, result)
     },
-    checkSubmitStatus() {
-      if (this.form.status) {
+    nativeSubmit() {
+      if (!this.submitDisabled) {
         this.$message({
           message: "登入成功",
           type: "success"
@@ -172,7 +130,26 @@ export default {
           type: "warning"
         })
       }
-    }
+    },
+
+    // element UI validate
+    submit(formName) {
+      this.$refs[formName].validate(valid => {
+        console.log("valid: ", valid)
+        if (valid) {
+          this.$message({
+            message: "登入成功",
+            type: "success"
+          })
+        } else {
+          this.$message({
+            message: "登入失敗",
+            type: "warning"
+          })
+          return false
+        }
+      })
+    },
   },
 
   created() {
