@@ -65,21 +65,40 @@ export default {
         email: { value: '', msg: '' },
         url: { value: '', msg: '' },
       },
+      submitDisabled: true,
       form2: {
         name: '',
         tel: '',
         phone: '',
         email: '',
         url: '',
-
       },
       rules: {
-        tel: [{ required: true, pattern: /\d{2}-[2]\d{7}/ ,message: "電話號碼格式錯誤", trigger: "blur" }],
-        phone: [{ required: true, pattern: /\d{4}-\d{3}-\d{3}/ ,message: "手機號碼格式錯誤", trigger: "blur" }],
-        email: [{ required: true, pattern: /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/ ,message: "Email格式錯誤", trigger: "blur" }],
-        url: [{ required: true, pattern: /^((ht|f)tps?):\/\/[\w\-]+(\.[\w\-]+)+([\w\-.,@?^=%&:\/~+#]*[\w\-@?^=%&\/~+#])?$/ ,message: "網址格式錯誤", trigger: "blur" }]
-      },
-      submitDisabled: true
+        tel: [{
+          required: true,
+          pattern: /\d{2}-[2]\d{7}/,
+          message: "電話號碼格式錯誤",
+          trigger: "blur"
+        }],
+        phone: [{
+          required: true,
+          pattern: /\d{4}-\d{3}-\d{3}/,
+          message: "手機號碼格式錯誤",
+          trigger: "blur"
+        }],
+        email: [{
+          required: true,
+          pattern: /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/,
+          message: "Email格式錯誤",
+          trigger: "blur"
+        }],
+        url: [{
+          required: true,
+          pattern: /^((ht|f)tps?):\/\/[\w\-]+(\.[\w\-]+)+([\w\-.,@?^=%&:\/~+#]*[\w\-@?^=%&\/~+#])?$/,
+          message: "網址格式錯誤",
+          trigger: "blur"
+        }]
+      }
     };
   },
 
