@@ -71,7 +71,13 @@ const router = new Router({
           name: 'VueI18n',
           component: () => import('./components/home/VueI18n.vue'),
           meta: { requireAuth: true }
-        }
+        },
+        {
+          path: 'uploader',
+          name: 'Uploader',
+          component: () => import('./components/home/Uploader.vue'),
+          meta: { requireAuth: true }
+        },
       ]
     }
   ]

@@ -23,6 +23,10 @@
         <ul>
           <li @click="$router.push({name: 'VueI18n'})">i18n</li>
         </ul>
+        <label>上傳機制</label>
+        <ul>
+          <li @click="$router.push({name: 'Uploader'})">Uploader</li>
+        </ul>
         <label>圖表</label>
         <ul>
           <li @click="$router.push({name: 'Dashboard'})">v-charts</li>
