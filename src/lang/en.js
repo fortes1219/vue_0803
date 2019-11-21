@@ -4,6 +4,6 @@ module.exports = {
   change_language: 'change language',
   please_select: 'please select',
   locale_en: 'English',
-  locale_zh_tw: '繁體中文',
+  locale_zh_tw: 'Chinese (Traditional)',
   locale_jp: 'Japenese'
 }
