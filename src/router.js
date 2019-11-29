@@ -30,12 +30,17 @@ const router = new Router({
           component: () => import('./components/home/VuexTemp.vue')
         },
         {
+          path: 'vuex_detail',
+          name: 'VuexDetail',
+          component: () => import('./components/home/VuexTempDetail.vue')
+        },
+        {
           path: 'api',
           name: 'API',
           component: () => import('./components/home/ApiTemp.vue')
         },
         {
-          path: 'data-event',
+          path: 'data_event',
           name: 'DataEvent',
           component: () => import('./components/home/DataEvent.vue')
         },
