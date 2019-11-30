@@ -5,14 +5,14 @@ import modules from './modules'
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
-	modules,
-	state: {
+  modules,
+  state: {
 
-	},
-	mutations: {
+  },
+  mutations: {
 
-	},
-	actions: {}
+  },
+  actions: {}
 })
 
 export default store
