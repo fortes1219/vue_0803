@@ -1,32 +1,33 @@
 <template>
   <div class="page api_temp">
     <div class="row column">
-      <div class="row horizontal v_center">
-        <div class="input_inner" data-width="20rem" data-space="space-next">
-          <el-input v-model="searchObj.id" type="text" placeholder="enter id" />
-        </div>
-        <div class="input_inner" data-width="20rem" data-space="space-next">
-          <el-input v-model="searchObj.name" type="text" placeholder="enter name" data-width="10rem" data-space="space-next" />
-        </div>
-        <div class="input_inner" data-width="30rem" data-space="space-next">
+      <el-form label-width="8rem" data-width="20rem" data-space="space-vertical">
+        <el-form-item label="ID">
+          <el-input v-model="postObj.id" type="text" />
+        </el-form-item>
+        <el-form-item label="Name">
+          <el-input v-model="postObj.name" type="text" />
+        </el-form-item>
+        <el-form-item label="Class">
+          <el-input v-model="postObj.class" type="text" />
+        </el-form-item>
+        <el-form-item label="Date">
           <el-date-picker
-            v-model="pickTime"
-            type="datetimerange"
-            range-separator="~"
-            start-placeholder="Start Time"
-            end-placeholder="End Time"
+            v-model="postObj.date"
+            type="datetime"
             value-format="yyyy-MM-dd HH:mm:ss"
-            @change="handleDatePickup"
+            :placeholder="$t(select_datetime)"
           />
+        </el-form-item>
+        <div class="row horizontal v_center end">
+          <el-button @click="packagePostData">Add Data(POST)</el-button>
         </div>
-        <el-button type="primary" @click="handleSearch">Search</el-button>
-      </div>
-      <div class="row" data-space="space-vertical">
-        <el-button @click="packagePostData">Add Data(POST)</el-button>
-      </div>
+      </el-form>
+
       <el-table :data="tableData" style="width: 100%; overflow: hidden;" height="76vh">
         <el-table-column prop="id" label="ID" align="center" width="100" />
-        <el-table-column prop="name" label="Name" />
+        <el-table-column prop="name" label="Name" align="center" width="100" />
+        <el-table-column prop="class" label="Class" />
         <el-table-column prop="date" label="Date" />
         <el-table-column label="Action" align="center" width="120">
           <template slot-scope="scope">
@@ -39,23 +40,25 @@
 </template>
 
 <script>
-
+import { getLanguage, setLanguage } from "../../lang"
 export default {
   name: "apiTemp",
   data() {
     return {
+      lang: 'zh_tw',
       tableData: [],
       pickTime: '',
-      searchObj: {
+      postObj: {
         id: '',
         name: '',
-        startTime: null,
-        endTime: null
+        class: '',
+        date: ''
       }
     }
   },
 
   created() {
+    getLanguage
     this.packageGetData()
   },
 
@@ -68,7 +71,7 @@ export default {
     // },
 
     async packageGetData() {
-      const url = 'tableData'
+      const url = 'http://localhost:3000/tableData'
       let res = await this.$api.get(url)
       console.log(res)
       this.tableData = [...res]
@@ -81,32 +84,23 @@ export default {
     },
 
     async packagePostData() {
-      const source = 'tableData'
+      const source = 'http://localhost:3000/tableData'
       const currentDate = new Date().toJSON().slice(0, 10)
-      const postData = {
-        id: `${this.tableData.length}`,
-        name: 'data ' + `${this.tableData.length + 1}`,
-        date: currentDate
-      }
-      await this.$api.post(source, postData)
+      // const postData = {
+      //   id: `${this.tableData.length}`,
+      //   name: 'data ' + `${this.tableData.length + 1}`,
+      //   date: currentDate
+      // }
+      await this.$api.post(source, this.postObj)
       this.packageGetData()
       console.log(source.data)
     },
 
     async delData(id) {
-      const source = 'tableData/' + `${id}`
+      const source = 'http://localhost:3000/tableData/' + `${id}`
       await this.$api.delete(source)
       this.packageGetData()
       console.log(this.tableData)
-    },
-
-    handleDatePickup() {
-      if (this.pickTime != null)
-      // 預防組件的清空按鈕按下後將資料型態改為null、造成type error，所以要先判別pickTime的內容是否為null
-      [this.searchObj.startTime, this.searchObj.endTime] = [this.pickTime[0], this.pickTime[1]]
-      else
-      [this.searchObj.startTime, this.searchObj.endTime] = [null, null]
-      console.log(this.searchObj)
     },
 
     async handleSearch() {
