@@ -4,6 +4,9 @@ import VueI18n from 'vue-i18n'
 import twLocale from './zh_tw'
 import enLocale from './en'
 import jpLocale from './jp'
+import locale_TW from 'element-ui/lib/locale/lang/zh-TW'
+import locale_EN from 'element-ui/lib/locale/lang/en'
+import locale_JA from 'element-ui/lib/locale/lang/ja'
 // 這裡需要element UI 的locale設置
 import locale from 'element-ui/lib/locale'
 
@@ -14,13 +17,16 @@ locale.i18n((key, value) => i18n.t(key, value)) // i18n.t(key, value) = $t(key, 
 
 const messages = {
   en: {
-    ...enLocale
+    ...enLocale,
+    ...locale_EN
   },
   zh_tw: {
-    ...twLocale
+    ...twLocale,
+    ...locale_TW
   },
   jp: {
-    ...jpLocale
+    ...jpLocale,
+    ...locale_JA
   }
 }
 
