@@ -2,8 +2,8 @@ const path = require("path");
 // const burl = '@/views/default/'
 // const burl = ''
 module.exports = {
-  baseUrl: "",
   lintOnSave: false,
+  publicPath: '.',
   pages: {
     index: {
       // entry for the page
@@ -25,6 +25,8 @@ module.exports = {
         'vue$': 'vue/dist/vue.esm.js',
         '@': path.resolve('src'),
         'src': path.resolve('src'),
+        'utils': path.resolve('src/utils'),
+        'styles': path.resolve('src/styles'),
         'assets': path.resolve('src/assets'),
         'components': path.resolve('src/components'),
         'services': path.resolve('src/services'),

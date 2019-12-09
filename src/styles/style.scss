@@ -1,0 +1,17 @@
+@import "./reset";
+@import "./easing";
+@import "./flexbox";
+@import "./dataAttribute";
+@import "./scrollbar";
+@import "./customize";
+@import "./element_ui_customize.scss";
+
+body, html {
+    height: 100%;
+    background: transparent;
+
+    #app {
+        width: 100%;
+        height: 100%;
+    }
+}
