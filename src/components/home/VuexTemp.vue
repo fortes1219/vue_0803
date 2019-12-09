@@ -96,12 +96,6 @@ export default {
       this.setFlag()
       this.changeEpilogue()
     }
-  },
-
-  // created() {
-  //   console.log(this.mapGetTotal)
-  //   this.mapGetFlag
-  //   this.mapGetEpilogue
-  // }
+  }
 };
 </script>
