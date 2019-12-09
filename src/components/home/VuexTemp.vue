@@ -36,11 +36,16 @@
     </div>
     <br />
     <el-button @click="$router.push({name: 'VuexDetail'})">結果へ</el-button>
+    <div class="row vertical v_center" data-space="space-vertical">
+      <p>スコア：{{ mapGetTotal }}</p><br>
+      <p>フラグ：{{ mapGetFlag }}</p><br>
+      <p>可能なエンディング：{{ mapGetEpilogue }}</p>
+    </div>
   </div>
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions, mapMutations } from "vuex";
+import { mapState, mapGetters, mapActions, mapMutations } from "vuex"
 export default {
   name: "VuexTemp",
   data() {
@@ -75,12 +80,11 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["mapGetTotal"]),
+    ...mapGetters(["mapGetTotal", "mapGetFlag", "mapGetEpilogue"]),
 
     getTotalScore() {
-      let result =
-        this.flagItem.selectA + this.flagItem.selectB + this.flagItem.selectC;
-      return result;
+      let result = this.flagItem.selectA + this.flagItem.selectB + this.flagItem.selectC
+      return result
     }
   },
 
@@ -88,16 +92,16 @@ export default {
     ...mapActions(["setFlag"]),
     ...mapMutations(["changeTotal", "changeFlag", "changeEpilogue"]),
     onRadioChange() {
-      this.changeTotal(this.getTotalScore);
-      this.setFlag();
-      this.changeEpilogue();
+      this.changeTotal(this.getTotalScore)
+      this.setFlag()
+      this.changeEpilogue()
     }
   },
 
-  created() {
-    this.mapGetTotal;
-    this.mapGetFlag;
-    this.mapGetEpilogue;
-  }
+  // created() {
+  //   console.log(this.mapGetTotal)
+  //   this.mapGetFlag
+  //   this.mapGetEpilogue
+  // }
 };
 </script>

@@ -5,16 +5,17 @@ const state = {
 }
 const getters = {
   mapGetTotal: state => {
-    state.total
-    console.log('vuex total: ', state.total)
+    return state.total
+    // console.log('vuex total: ', state.total)
   },
   mapGetFlag: state => {
-    state.flag
     console.log('vuex flag: ', state.flag)
+    return state.flag
+
   },
   mapGetEpilogue: state => {
-    state.epilogue
     console.log('vuex epilogue: ', state.epilogue)
+    return state.epilogue
   }
 }
 const mutations = {
@@ -37,16 +38,16 @@ const mutations = {
   changeEpilogue(state) {
     switch (state.flag) {
       case 'a':
-        state.epilogue = 'normal end'
+        state.epilogue = '日常 END'
         break
       case 'b':
-        state.epilogue = 'true end'
+        state.epilogue = 'True END'
         break
       case 'c':
-        state.epilogue = 'normal end'
+        state.epilogue = '聖堂教会 END'
         break
       case 'd':
-        state.epilogue = 'normal end'
+        state.epilogue = 'イリヤ添い寝 END'
         break
     }
   }
