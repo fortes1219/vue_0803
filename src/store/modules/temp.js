@@ -5,8 +5,8 @@ const state = {
 }
 const getters = {
   mapGetTotal: state => {
+    console.log('vuex total: ', state.total)
     return state.total
-    // console.log('vuex total: ', state.total)
   },
   mapGetFlag: state => {
     console.log('vuex flag: ', state.flag)
