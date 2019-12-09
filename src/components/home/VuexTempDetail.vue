@@ -5,7 +5,9 @@
     <el-button @click="$router.go(-1)">Go Back</el-button>
 		<br>
     <div class="row vertical" data-space="space-vertical">
-      <b>{{ endding }}</b><br>
+      <p>スコア：{{ total }}</p><br>
+      <b>フラグ：{{ flag }}</b><br>
+      <b>エンディング：{{ endding }}</b><br>
       <div v-if="flag == 'a'">
         <img src="img/end_1.jpg" style="width: 100%;">
       </div>
@@ -53,12 +55,9 @@ export default {
   },
 
   created() {
-    this.mapGetTotal
-    this.total = this.$store.state.temp.total
-    this.flag = this.$store.state.temp.flag
-    this.endding = this.$store.state.temp.epilogue
-    console.log('total: ', this.total)
-    console.log('flag: ', this.flag)
+    this.total = this.mapGetTotal
+    this.flag = this.mapGetFlag
+    this.endding = this.mapGetEpilogue
   }
 };
 </script>
