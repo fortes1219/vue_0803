@@ -6,7 +6,7 @@
         <label>Home</label>
         <ul>
           <li @click="$router.push({name: 'Dashboard'})">Dashboard</li>
-          <li @click="$router.push({name: 'Dashboard'})">Component</li>
+          <li @click="$router.push({name: 'Component'})">Component</li>
           <li @click="$router.push({name: 'DataEvent'})">Data Event</li>
           <li @click="$router.push({name: 'Pickup'})">Pickup</li>
           <li @click="$router.push({name: 'Dashboard'})">圖表</li>
