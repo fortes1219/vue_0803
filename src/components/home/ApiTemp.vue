@@ -16,7 +16,7 @@
             v-model="postObj.date"
             type="datetime"
             value-format="yyyy-MM-dd HH:mm:ss"
-            :placeholder="$t(select_datetime)"
+            :placeholder="$t('select_datetime')"
           />
         </el-form-item>
         <div class="row horizontal v_center end">
@@ -24,36 +24,66 @@
         </div>
       </el-form>
 
-      <el-table :data="tableData" style="width: 100%; overflow: hidden;" height="76vh">
+      <el-table :data="tableData" style="width: 100%; overflow: hidden;" height="50vh">
         <el-table-column prop="id" label="ID" align="center" width="100" />
         <el-table-column prop="name" label="Name" align="center" width="100" />
         <el-table-column prop="class" label="Class" />
         <el-table-column prop="date" label="Date" />
-        <el-table-column label="Action" align="center" width="120">
+        <el-table-column label="Action" align="center">
           <template slot-scope="scope">
-            <el-button @click="delData(scope.row.id)">DELETE</el-button>
+            <el-button type="danger" @click="delData(scope.row.id)">DELETE</el-button>
+            <el-button type="warning" @click="openEditDialog(scope.row)">EDIT</el-button>
           </template>
         </el-table-column>
       </el-table>
     </div>
+    <!--Dialog-->
+    <el-dialog title="編輯" :visible.sync="editDialog">
+      <el-form label-width="8rem" data-width="20rem" data-space="space-vertical">
+        <el-form-item label="ID">
+          <el-input v-model="editForm.id" type="text" />
+        </el-form-item>
+        <el-form-item label="Name">
+          <el-input v-model="editForm.name" type="text" />
+        </el-form-item>
+        <el-form-item label="Class">
+          <el-input v-model="editForm.class" type="text" />
+        </el-form-item>
+        <el-form-item label="Date">
+          <el-date-picker
+            v-model="editForm.date"
+            type="datetime"
+            value-format="yyyy-MM-dd HH:mm:ss"
+            :placeholder="$t('select_datetime')"
+          />
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="editDialog = false">取消</el-button>
+        <el-button @click="updateData" type="primary">送出</el-button>
+      </span>
+      </el-dialog>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 import { getLanguage, setLanguage } from "../../lang"
+import { stringify } from 'querystring'
 export default {
   name: "apiTemp",
   data() {
     return {
       lang: 'zh_tw',
       tableData: [],
-      pickTime: '',
       postObj: {
         id: '',
         name: '',
         class: '',
         date: ''
-      }
+      },
+      editForm: {},
+      editDialog: false,
     }
   },
 
@@ -63,18 +93,12 @@ export default {
   },
 
   methods: {
-    // async packageGetData() {
-    //   const source = 'http://localhost:3000/tableData'
-    //   let res = await this.$api.get(source)
-    //   this.tableData = [...res]
-    //   console.log(res)
-    // },
-
     async packageGetData() {
-      const url = 'http://localhost:3000/tableData'
+      const url = 'http://localhost:3000/tableData?_sort=id'
       let res = await this.$api.get(url)
       console.log(res)
       this.tableData = [...res]
+      // 正式環境才有後端給來的result回應，這裡只做註解
       // if (res.result == 1)  {
       //   console.log(res)
       //   this.tableData = [...res.data]
@@ -86,14 +110,33 @@ export default {
     async packagePostData() {
       const source = 'http://localhost:3000/tableData'
       const currentDate = new Date().toJSON().slice(0, 10)
-      // const postData = {
-      //   id: `${this.tableData.length}`,
-      //   name: 'data ' + `${this.tableData.length + 1}`,
-      //   date: currentDate
-      // }
       await this.$api.post(source, this.postObj)
       this.packageGetData()
       console.log(source.data)
+    },
+
+    openEditDialog(obj) {
+      this.editDialog = true
+      this.editForm = {...obj}
+      console.log('edit obj: ', this.editForm)
+    },
+
+    async updateData() {
+      let id = this.editForm.id
+      const source = 'http://localhost:3000/tableData/' + `${id}`
+      try {
+        await this.$api.put(source, this.editForm)
+        this.$message({
+          message: '編輯成功',
+          type: 'success'
+        })
+        this.editDialog = false
+        console.log('ID ' + id + ' 編輯成功')
+      }
+      catch {
+        this.$message.error('編輯失敗')
+      }
+      this.packageGetData()
     },
 
     async delData(id) {
@@ -103,26 +146,6 @@ export default {
       console.log(this.tableData)
     },
 
-    async handleSearch() {
-      let query = `?id=${this.searchObj.id}&q=${this.searchObj.name}&date_gte=${this.searchObj.startTime}&date_lte=${this.searchObj.endTime}`
-      let queryConditions = query
-      if (this.searchObj.id === '') {
-        queryConditions = queryConditions.replace(`id=${this.searchObj.id}&`, '')
-      }
-      if (this.searchObj.name == '') {
-        queryConditions = queryConditions.replace(`q=${this.searchObj.name}&`, '')
-      }
-      if (this.pickTime === null) {
-        queryConditions = queryConditions.replace(`&date_gte=${this.searchObj.startTime}&date_lte=${this.searchObj.endTime}`, '')
-      }
-
-      console.log(queryConditions)
-      let source = 'tableData' + queryConditions
-
-      let res = await this.$api.get(source)
-      this.tableData = [...res]
-      console.log(source)
-    }
   }
 };
 </script>
