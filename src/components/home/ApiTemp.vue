@@ -31,7 +31,7 @@
         <el-table-column prop="date" label="Date" />
         <el-table-column label="Action" align="center">
           <template slot-scope="scope">
-            <el-button type="danger" @click="delData(scope.row.id)">DELETE</el-button>
+            <el-button type="danger" @click="delCheck(scope.row.id)">DELETE</el-button>
             <el-button type="warning" @click="openEditDialog(scope.row)">EDIT</el-button>
           </template>
         </el-table-column>
@@ -137,6 +137,28 @@ export default {
         this.$message.error('編輯失敗')
       }
       this.packageGetData()
+    },
+
+    async delCheck(id) {
+      try {
+        await this.$confirm(
+          '將會刪除資料，是否繼續？', '刪除資料', {
+          confirmButtonText: '確認刪除',
+          cancelButtonText: '取消',
+          type: 'warning'
+        })
+        await this.delData(id)
+        this.$message({
+          message: '刪除成功',
+          type: 'success'
+        })
+      }
+      catch {
+        this.$message({
+          message: '已取消删除',
+          type: 'info'
+        })
+      }
     },
 
     async delData(id) {
