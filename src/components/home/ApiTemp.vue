@@ -4,6 +4,7 @@
       <el-form label-width="8rem" data-width="20rem" data-space="space-vertical">
         <el-form-item label="ID">
           <el-input v-model="postObj.id" type="text" />
+          <!-- <el-input v-model="postObj.id" type="text" @input="parser($event, postObj)"/> -->
         </el-form-item>
         <el-form-item label="Name">
           <el-input v-model="postObj.name" type="text" />
@@ -167,6 +168,36 @@ export default {
       this.packageGetData()
       console.log(this.tableData)
     },
+
+    parser(val, obj) {
+      obj.id = this.dealInput(val, true)
+      console.log(val, obj)
+    },
+
+    dealInput(value, limited = false) {
+      value = value.replace(/^0*(0\.|[1-9])/, "$1")
+      value = value.replace(/[^\d.]/g, "") // 清除數字和「.」以外的字符
+      value = value.replace(/^\./g, "") // 驗證第一個字元是否為數字
+      value = value.replace(/\.{1,}/g, ".") // 只保留第一个「.」
+      value = value
+      .replace(".", "$#$")
+      .replace(/\./g, "")
+      .replace("$#$", ".")
+
+      // 限制只能輸入至小數第二位
+      value = value.replace(/^(\-)*(\d*)\.(\d\d).*$/, "$1$2.$3")
+      // 正整數部分限制最多位數
+      let limitedNum = 0
+      if (limited) {
+        limitedNum = 3
+      } else {
+        // 等於value的長度代表無限制
+        limitedNum = value.length
+      }
+      value = value.indexOf(".") > 0 ? value.split(".")[0].substring(0, limitedNum) + "." + value.split(".")[1] : value.substring(0, limitedNum)
+
+      return value
+    }
 
   }
 };
