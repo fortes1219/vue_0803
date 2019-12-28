@@ -40,7 +40,6 @@ const api = {
     })
   },
 
-
   delete: (url, params) => {
     return new Promise((resolve, reject) => {
       axios.delete(url)

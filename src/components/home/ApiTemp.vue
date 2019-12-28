@@ -63,7 +63,6 @@
         <el-button @click="editDialog = false">取消</el-button>
         <el-button @click="updateData" type="primary">送出</el-button>
       </span>
-      </el-dialog>
     </el-dialog>
   </div>
 </template>
@@ -100,6 +99,8 @@ export default {
       console.log(res)
       this.tableData = [...res]
       // 正式環境才有後端給來的result回應，這裡只做註解
+      // let jwt = {...}
+      // let res = await apiAny(jwt)
       // if (res.result == 1)  {
       //   console.log(res)
       //   this.tableData = [...res.data]
