@@ -6,5 +6,11 @@ module.exports = {
   please_select: 'please select',
   locale_en: 'English',
   locale_zh_tw: 'Chinese (Traditional)',
-  locale_jp: 'Japenese'
+  locale_jp: 'Japenese',
+  input_format_error: 'var_1 format error',
+  input_required: 'var_1 is required.',
+  form_tel: 'TEL',
+  form_phone: 'Phone',
+  form_email: 'Email',
+  form_website: 'WEB Site'
 }

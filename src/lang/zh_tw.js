@@ -6,5 +6,11 @@ module.exports = {
   please_select: '請選擇',
   locale_en: 'English',
   locale_zh_tw: '繁體中文',
-  locale_jp: '日文'
+  locale_jp: '日文',
+  input_format_error: 'var_1格式錯誤',
+  input_required: 'var_1為必填，不可為空',
+  form_tel: '電話號碼',
+  form_phone: '手機號碼',
+  form_email: 'Email',
+  form_website: '個人網站'
 }

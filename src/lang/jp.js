@@ -6,5 +6,11 @@ module.exports = {
   please_select: '言語を選んでください',
   locale_en: '英語',
   locale_zh_tw: '中国語(台湾)',
-  locale_jp: '日本語'
+  locale_jp: '日本語',
+  input_format_error: 'var_1 フォーマット間違っています。',
+  input_required: 'var_1 必ず入力してください',
+  form_tel: '電話番号',
+  form_phone: '携帯番号',
+  form_email: 'メールアドレス',
+  form_website: 'サイト'
 }
