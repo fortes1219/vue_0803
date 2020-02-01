@@ -104,7 +104,7 @@ export default {
           {
             required: true,
             pattern: /\d{2}-[2]\d{7}/,
-            message: this.i18nIsRequired(this.$t('form_tel')),
+            message: this.i18nFormatError(this.$t('form_tel')),
             trigger: 'blur'
           }
         ],
