@@ -52,7 +52,7 @@
     <!--使用element UI 內建驗證 v-bind:rules-->
     <el-form ref="loginForm" :model="form2" :rules="rules" label-width="100px" data-width="30rem">
       <el-form-item label="姓名" prop="name">
-        <el-input v-model="form2.name" type="text" placeholder="請輸入姓名" />
+        <el-input v-model="form2.name" type="text" :placeholder="$t('validate.error.tel')" />
       </el-form-item>
       <el-form-item :label="$t('form_tel')" prop="tel">
         <el-input v-model="form2.tel" type="text" placeholder="請輸入電話號碼" />
