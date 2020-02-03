@@ -15,24 +15,11 @@ module.exports = {
   form_email: 'Email',
   form_website: '個人網站',
   placeholder: {
-    name: '請輸入姓名',
-    tel: '請輸入電話號碼',
-    phone: '請輸入手機號碼',
-    email: '請輸入Email',
-    website: '請輸入個人網站'
+    enter: '請輸入',
+    example: 'ex: '
   },
   validate: {
-    error: {
-      tel: '電話號碼格式錯誤',
-      phone: '手機號碼格式錯誤',
-      email: 'Email格式錯誤',
-      website: '個人網站格式錯誤'
-    },
-    required: {
-      tel: '電話號碼不可為空',
-      phone: '手機號碼不可為空',
-      email: 'Email不可為空',
-      website: '個人網站不可為空'
-    }
+    error: 'var_1格式錯誤',
+    required: 'var_1必填，不可為空'
   }
 }

@@ -9,8 +9,17 @@ module.exports = {
   locale_jp: 'Japenese',
   input_format_error: 'var_1 format error',
   input_required: 'var_1 is required.',
+  form_name: 'Name',
   form_tel: 'TEL',
   form_phone: 'Phone',
   form_email: 'Email',
-  form_website: 'WEB Site'
+  form_website: 'WEB Site',
+  placeholder: {
+    enter: 'please enter ',
+    example: 'ex: '
+  },
+  validate: {
+    error: 'var_1 format error',
+    required: 'var_1 is required'
+  }
 }
