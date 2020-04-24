@@ -25,6 +25,12 @@ const router = new Router({
           meta: { requireAuth: true }
         },
         {
+          path: 'component',
+          name: 'Component',
+          component: () => import('./components/home/Component.vue'),
+          meta: { requireAuth: true }
+        },
+        {
           path: 'vuex',
           name: 'Vuex',
           component: () => import('./components/home/VuexTemp.vue')

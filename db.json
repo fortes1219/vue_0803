@@ -23,9 +23,21 @@
   "tableData": [
     {
       "id": "009",
-      "name": "leon",
-      "class": "police",
+      "name": "LEON",
+      "class": "Police(R.P.D)",
       "date": "2019-12-02 00:00:00"
+    },
+    {
+      "id": "001",
+      "name": "Claire",
+      "class": "Survivor",
+      "date": "2019-12-25 15:04:48"
+    },
+    {
+      "id": "002",
+      "name": "Tyrant-002",
+      "class": "B.O.W.",
+      "date": "2019-12-26 00:00:00"
     }
   ]
 }
