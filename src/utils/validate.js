@@ -5,6 +5,12 @@ export const reg_url = (val) => {
   return validate.test(val)
 }
 
+// 找出URL中的Domain name，唯獨這種的找不到：https://dev.anysite.com/，只會撈到"dev"
+export const getUrlDomain = (url) => {
+  url = url.replace(/^((ht|f)tps?):\/\/|(?:w{3}\.)|(?:\.\w+\.\w+){1,}|(\.\w+)|(\/\w+)|(?:\/\w+|(?:\/+))$/g, '')
+  return url
+}
+
 // ID (TW)
 
 export const reg_twid = (val) => {
